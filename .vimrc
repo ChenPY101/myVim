@@ -70,18 +70,18 @@ set nu		"显示行数
 set laststatus=2	"显示状态行
 set encoding=utf-8  
 set showmatch      "光标遇到括号，自动高亮另一个
-set scrolloff=5     "距离顶部底部的行数"
+set scrolloff=5     "距离顶部底部的行数
 
-set textwidth=80  "设置行宽 一行显示多少字符"
+set textwidth=80  "设置行宽 一行显示多少字符
 set wrap          "自动折行
 "set nowrap        "关闭自动折行
 "set wrapmargin=2  "折行处与编辑窗口右边缘之间空的字符数
-set linebreak     "只有遇到指定的符号才折行，如空格，连词号等。不在单词内折行"
+set linebreak     "只有遇到指定的符号才折行，如空格，连词号等。不在单词内折行
 
-set cursorcolumn  "高亮列"
-set cursorline    "高亮行" 
-set showmode      "底部显示处于命令模式还是插入模式"
-set mouse=a      "支持使用鼠标"
+set cursorcolumn  "高亮列
+set cursorline    "高亮行
+set showmode      "底部显示处于命令模式还是插入模式
+set mouse=a      "支持使用鼠标
 
 set hlsearch    "搜索时 高亮匹配结果
 set incsearch   "搜索时 每输入一个字符，自动跳到第一个匹配结果
