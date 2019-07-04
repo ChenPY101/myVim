@@ -10,9 +10,17 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'ervandew/supertab'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'iamcco/mathjax-support-for-mkdp'
+Plugin 'iamcco/markdown-preview.vim'
 
 call vundle#end()
 filetype plugin indent on
+" required" 常用命令
+" :PluginList - 查看已经安装的插件
+" :PluginInstall - 安装插件
+" :PluginUpdate - 更新插件
+" :PluginSearch - 搜索插件，例如 :PluginSearch xml就能搜到xml相关的插件
+" :PluginClean - 删除插件，把安装插件对应行删除，然后执行这个命令即可
 " ------------Vundle End   --------------
 
 
@@ -57,6 +65,18 @@ let g:airline_right_alt_sep = '⮃'
 "let g:airline_symbols.readonly = '⭤'
 
 
+"----------markdown---------------
+" for normal mode
+nmap <silent> <F8> <Plug>MarkdownPreview
+" for insert mode
+imap <silent> <F8> <Plug>MarkdownPreview
+" for normal mode
+nmap <silent> <F9> <Plug>StopMarkdownPreview
+" for insert mode
+imap <silent> <F9> <Plug>StopMarkdownPreview
+
+
+
 syntax on      "语法高亮
 
 set smarttab
@@ -70,18 +90,18 @@ set nu		"显示行数
 set laststatus=2	"显示状态行
 set encoding=utf-8  
 set showmatch      "光标遇到括号，自动高亮另一个
-set scrolloff=5     "距离顶部底部的行数
+set scrolloff=5     "距离顶部底部的行数"
 
-set textwidth=80  "设置行宽 一行显示多少字符
-set wrap          "自动折行
-"set nowrap        "关闭自动折行
+set textwidth=80  "设置行宽 一行显示多少字符"
+"set wrap          "自动折行
+set nowrap        "关闭自动折行
 "set wrapmargin=2  "折行处与编辑窗口右边缘之间空的字符数
-set linebreak     "只有遇到指定的符号才折行，如空格，连词号等。不在单词内折行
+set linebreak     "只有遇到指定的符号才折行，如空格，连词号等。不在单词内折行"
 
-set cursorcolumn  "高亮列
-set cursorline    "高亮行
-set showmode      "底部显示处于命令模式还是插入模式
-set mouse=a      "支持使用鼠标
+set cursorcolumn  "高亮列"
+set cursorline    "高亮行" 
+set showmode      "底部显示处于命令模式还是插入模式"
+set mouse=a      "支持使用鼠标"
 
 set hlsearch    "搜索时 高亮匹配结果
 set incsearch   "搜索时 每输入一个字符，自动跳到第一个匹配结果
@@ -116,7 +136,17 @@ map <esc>h :vertical resize -3<CR>
 map <esc>l :vertical resize +3<CR>
 
 
-
-
-
-
+"剪切板
+"无法使用系统的剪贴板时，可能时少装了几个东西
+"sudo apt-get install vim vim-scripts vim-gtk vim-gnome
+"vim --version | grep clipboard 查看
+"clipboard 和  xterm_clipboard 前为+
+"+y 复制到系统剪贴板
+"+p 黏贴
+"+gp 黏贴并光标移动到黏贴内容后
+"nmap <c-v> "+gp
+"nmap <c-c> "+y
+" 但是<c-v>为常用的块命令，修改成
+let mapleader=","
+nmap <leader>v "+gp
+nmap <leader>c "+y
