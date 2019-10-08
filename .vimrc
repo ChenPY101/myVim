@@ -3,6 +3,7 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
@@ -12,6 +13,8 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'iamcco/mathjax-support-for-mkdp'
 Plugin 'iamcco/markdown-preview.vim'
+Plugin 'chrisbra/changesPlugin'   "显示vim文档那些行被修改
+Plugin 'nathanaelkane/vim-indent-guides'  "显示缩进线
 
 call vundle#end()
 filetype plugin indent on
@@ -24,48 +27,48 @@ filetype plugin indent on
 " ------------Vundle End   --------------
 
 
-"--------NERDTree config--------------- 
-"打开目录树
+" --------NERDTree config--------------- 
+" 打开目录树
 map <F2> :NERDTreeToggle<CR>   
-"打开当前目录
+" 打开当前目录
 nmap ,t :NERDTreeFind<CR>
-"忽略相关文件
+" 忽略相关文件
 let NERDTreeIgnore = ['\.pyc$','\.pyo$']
-"o 关闭打开目录树下的目录
+" o 关闭打开目录树下的目录
 
 
-"------- Airline config -----------------
+" ------- Airline config -----------------
 let g:airline_theme="dark" 
 
-"这个是安装字体后 必须设置此项" 
+" 这个是安装字体后 必须设置此项" 
 let g:airline_powerline_fonts = 1   
 
-"打开tabline功能,方便查看Buffer和切换,省去了minibufexpl插件 
+" 打开tabline功能,方便查看Buffer和切换,省去了minibufexpl插件 
 let g:airline#extensions#tabline#enabled = 1 
 let g:airline#extensions#tabline#buffer_nr_show = 1 
 
-"设置切换Buffer快捷键" 
+" 设置切换Buffer快捷键" 
 nnoremap <C-tab> :bn<CR> 
 nnoremap <C-s-tab> :bp<CR> 
 " 关闭状态显示空白符号计数
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
 " 设置consolas字体"前面已经设置过
-"set guifont=Consolas\ for\ Powerline\ FixedD:h11 
-"if !exists('g:airline_symbols') 
+" set guifont=Consolas\ for\ Powerline\ FixedD:h11 
+" if !exists('g:airline_symbols') 
 " let g:airline_symbols = {} 
-"endif 
+" endif 
 
 " old vim-powerline symbols
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-"let g:airline_symbols.branch = '⭠'
-"let g:airline_symbols.readonly = '⭤'
+" let g:airline_left_sep = '⮀'
+" let g:airline_left_alt_sep = '⮁'
+" let g:airline_right_sep = '⮂'
+" let g:airline_right_alt_sep = '⮃'
+" let g:airline_symbols.branch = '⭠'
+" let g:airline_symbols.readonly = '⭤'
 
 
-"----------markdown---------------
+" ----------markdown---------------
 " for normal mode
 nmap <silent> <F8> <Plug>MarkdownPreview
 " for insert mode
@@ -76,7 +79,40 @@ nmap <silent> <F9> <Plug>StopMarkdownPreview
 imap <silent> <F9> <Plug>StopMarkdownPreview
 
 
+"  -------- ChangesPlugin  文件显示修改痕迹 --------
+let g:changes_autocmd=1
+let g:changes_use_icons = 1
+" let g:changes_respect_SignColumn = 1
+let g:changes_sign_text_utf8 = 1
+" let g:changes_linehi_diff = 0
+" hi ChangesSignTextAdd ctermbg=yellow ctermfg=black guibg=green
+" hi ChangesSignTextDel ctermbg=white  ctermfg=black guibg=red
+" hi ChangesSignTextCh  ctermbg=black  ctermfg=white guibg=blue
 
+
+
+
+" -------- vim-indent-guides 显示缩进线 --------
+let g:indent_guides_enable_on_vim_startup = 1    "set indent guides enabled by default
+let g:indent_guides_auto_colors = 0                      "Setting custom indent colors
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 1
+let g:indent_guides_space_guides = 1
+let g:indent_guides_tab_guides = 0
+ 
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=238
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=darkgray
+ 
+" hi IndentGuidesOdd  guibg=red   ctermbg=0
+" hi IndentGuidesEven guibg=green   ctermbg=8
+
+
+
+
+
+
+
+" -------- 非插件类 ------------
 syntax on      "语法高亮
 
 set smarttab
@@ -142,11 +178,12 @@ map <esc>l :vertical resize +3<CR>
 "vim --version | grep clipboard 查看
 "clipboard 和  xterm_clipboard 前为+
 "+y 复制到系统剪贴板
-"+p 黏贴
-"+gp 黏贴并光标移动到黏贴内容后
+"+p 粘贴
+"+gp 粘贴并光标移动到黏贴内容后
 "nmap <c-v> "+gp
 "nmap <c-c> "+y
-" 但是<c-v>为常用的块命令，修改成
-let mapleader=","
+"但是<c-v>为常用的块命令，修改成 ,
+"即在normal模式下  ,+v  为粘贴
+let mapleader=","  
 nmap <leader>v "+gp
 nmap <leader>c "+y
